@@ -1,0 +1,23 @@
+{
+  "name": "@discord-agent/memory",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "@discord-agent/commons": "workspace:*",
+    "@discord-agent/db": "workspace:*",
+    "@discord-agent/embeddings": "workspace:*",
+    "@qdrant/js-client-rest": "^1.9.1",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.5.3",
+    "eslint": "^8.57.0"
+  }
+}

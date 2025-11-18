@@ -1,0 +1,15 @@
+# This is a placeholder for Qdrant's local configuration.
+# For a production setup, you would configure storage, performance, and networking.
+# See: https://qdrant.tech/documentation/guides/configuration/
+log_level: INFO
+
+storage:
+  # Where to store segments and other data.
+  storage_path: ./qdrant_storage
+  # Where to store snapshots.
+  snapshots_path: ./qdrant_storage/snapshots
+  on_disk_payload: true
+
+service:
+  http_port: 6333
+  grpc_port: 6334

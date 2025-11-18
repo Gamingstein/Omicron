@@ -1,0 +1,30 @@
+# Dockerfile for macOS Development
+# This helps standardize the development environment.
+# Note: This is not optimized for production or cross-compilation.
+
+FROM node:20-slim
+
+# Set up environment
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /app
+
+# Install dependencies first for layer caching
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+# Copy the rest of the monorepo
+COPY . .
+
+# Build all packages and apps
+RUN pnpm build
+
+# Expose ports for the services
+EXPOSE 3000 # bot (not serving http, but for reference)
+EXPOSE 3001 # mcp
+EXPOSE 3002 # local-llm
+
+# Command to run all services in development mode
+CMD ["pnpm", "dev"]

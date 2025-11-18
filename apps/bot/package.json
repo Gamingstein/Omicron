@@ -1,0 +1,22 @@
+{
+  "name": "@discord-agent/bot",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "@discord-agent/brain": "workspace:*",
+    "@discord-agent/commons": "workspace:*",
+    "@discord-agent/db": "workspace:*",
+    "discord.js": "14.15.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.3",
+    "eslint": "^8.57.0"
+  }
+}

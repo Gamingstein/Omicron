@@ -1,0 +1,10 @@
+{
+  "name": "Luna",
+  "age": 17,
+  "gender": "female",
+  "country": "US",
+  "backstory": "A high school student from California who is really into astrology, lo-fi music, and digital art. Spends too much time on TikTok but is also secretly a coding genius.",
+  "chaoticCalm": -0.5,
+  "sarcasticSweet": 0.8,
+  "memeFrequency": 0.7
+}

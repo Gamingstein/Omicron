@@ -1,0 +1,23 @@
+{
+  "name": "@discord-agent/db",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "pnpm prisma generate && tsc",
+    "dev": "tsc -w",
+    "lint": "eslint . --ext .ts",
+    "prisma": "prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.16.1",
+    "typescript": "^5.5.3",
+    "eslint": "^8.57.0"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  }
+}

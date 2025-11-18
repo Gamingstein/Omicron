@@ -1,0 +1,33 @@
+# Discord
+DISCORD_TOKEN=
+DISCORD_CLIENT_ID=
+DISCORD_OWNER_ID=
+
+# Gemini API Key (or other remote LLM)
+GEMINI_API_KEY=
+
+# MCP Server (secure communication between Brain and MCP)
+MCP_API_URL=http://localhost:3001
+MCP_SECRET=a-very-strong-secret-key
+
+# Local LLM Server
+LOCAL_LLM_API_URL=http://localhost:3002
+
+# Database (Prisma with SQLite)
+DATABASE_URL="file:./sqlite/dev.db"
+
+# Qdrant Vector Store
+QDRANT_URL=http://localhost:6333
+
+# Environment (development, production)
+NODE_ENV=development
+
+# Logging
+LOG_LEVEL=info
+
+# Local LLM Model Configuration (path to GGUF/ONNX model)
+# For macOS (ARM64)
+LOCAL_LLM_MODEL_PATH_MACOS=./models/your-macos-model.gguf
+
+# AES Encryption key for sensitive data (32 bytes hex encoded)
+ENCRYPTION_KEY=

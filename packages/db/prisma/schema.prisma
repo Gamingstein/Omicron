@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ServerConfig {
+  id          String @id @default(cuid())
+  guildId     String @unique
+  ownerId     String
+  personaId   String
+  persona     Persona @relation(fields: [personaId], references: [id])
+  auditLogWebhook String?
+  allowedCommands String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Persona {
+  id          String @id @default(cuid())
+  name        String
+  age         Int
+  gender      String
+  country     String
+  backstory   String
+  // Personality sliders
+  chaoticCalm Float // -1.0 (chaotic) to 1.0 (calm)
+  sarcasticSweet Float // -1.0 (sarcastic) to 1.0 (sweet)
+  memeFrequency Float // 0.0 (never) to 1.0 (always)
+  
+  serverConfigs ServerConfig[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserBio {
+  id          String @id @default(cuid())
+  userId      String @unique
+  bio         String // Encrypted short bio
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id          String @id @default(cuid())
+  guildId     String
+  action      String
+  targetType  String?
+  targetId    String?
+  executorId  String
+  reason      String?
+  timestamp   DateTime @default(now())
+}
+
+// Metadata for vectors stored in Qdrant
+model VectorMetadata {
+  id          String @id // Corresponds to Qdrant point ID (UUID)
+  guildId     String
+  channelId   String
+  userId      String?
+  messageId   String?
+  text        String // The original text that was embedded
+  summary     String // AI-generated summary of the text
+  tags        String[]
+  createdAt   DateTime @default(now())
+
+  @@index([guildId])
+  @@index([channelId])
+}

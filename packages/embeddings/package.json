@@ -1,0 +1,19 @@
+{
+  "name": "@discord-agent/embeddings",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "lint": "eslint . --ext .ts"
+  },
+  "dependencies": {
+    "@discord-agent/commons": "workspace:*",
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3",
+    "eslint": "^8.57.0"
+  }
+}
