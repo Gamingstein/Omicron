@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../node_modules/.prisma/client"
+  output   = "../../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -18,7 +18,7 @@ model ServerConfig {
   personaId   String
   persona     Persona @relation(fields: [personaId], references: [id])
   auditLogWebhook String?
-  allowedCommands String[]
+  allowedCommands String // Comma-separated list
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -68,7 +68,7 @@ model VectorMetadata {
   messageId   String?
   text        String // The original text that was embedded
   summary     String // AI-generated summary of the text
-  tags        String[]
+  tags        String // Comma-separated list
   createdAt   DateTime @default(now())
 
   @@index([guildId])

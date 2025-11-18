@@ -17,12 +17,6 @@ export async function generateEmbedding(text: string, size?: number): Promise<nu
     return response.data.embedding;
   } catch (error) {
     logger.error({ err: error }, 'Failed to generate embedding via local LLM service.');
-    // Optional: Implement fallback to a remote embedding service if the local one fails.
-    // For Pi Zero, this might be the primary method.
-    if (env.REMOTE_SMALL_LLM_ENDPOINT) {
-        // const fallbackResponse = await axios.post(env.REMOTE_SMALL_LLM_ENDPOINT, ...);
-        // return fallbackResponse.data.embedding;
-    }
     throw new Error('Embedding generation failed.');
   }
 }

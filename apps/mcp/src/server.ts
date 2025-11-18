@@ -1,11 +1,11 @@
-import express from 'express';
+import express, { Express } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import { Client } from 'discord.js';
 import { logger, env } from '@discord-agent/commons';
 import { prisma } from '@discord-agent/db';
 import { authMiddleware } from './auth';
 
-export function createServer(discordClient: Client) {
+export function createServer(discordClient: Client): Express {
   const app = express();
   app.use(express.json());
 
@@ -36,7 +36,8 @@ export function createServer(discordClient: Client) {
 
     const results = [];
     for (const task of tasks) {
-      if (!serverConfig.allowedCommands.includes(task.type)) {
+      const allowed = serverConfig.allowedCommands.split(',');
+      if (!allowed.includes(task.type)) {
         results.push({ task, success: false, error: 'Command not allowed in this server.' });
         continue;
       }
@@ -46,11 +47,11 @@ export function createServer(discordClient: Client) {
         switch (task.type) {
           case 'send_message':
             const channel = await discordClient.channels.fetch(task.target);
-            if (channel?.isTextBased()) {
+            if (channel && 'send' in channel) {
               await channel.send(task.params.text);
               results.push({ task, success: true });
             } else {
-              throw new Error('Channel not found or not a text channel.');
+              throw new Error('Channel not found or is not a sendable channel.');
             }
             break;
           // Add cases for ban, kick, mute, etc.

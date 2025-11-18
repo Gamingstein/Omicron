@@ -33,7 +33,6 @@ export const env = {
   
   // Model Paths
   LOCAL_LLM_MODEL_PATH_MACOS: process.env.LOCAL_LLM_MODEL_PATH_MACOS,
-  LOCAL_LLM_MODEL_PATH_PI: process.env.LOCAL_LLM_MODEL_PATH_PI,
 
   // Encryption
   ENCRYPTION_KEY: process.env.ENCRYPTION_KEY,

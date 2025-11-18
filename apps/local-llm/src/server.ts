@@ -1,8 +1,8 @@
-import express from 'express';
+import express, { Express } from 'express';
 import { logger } from '@discord-agent/commons';
 import { analyzeText, createEmbedding } from './llm';
 
-export function createServer() {
+export function createServer(): Express {
   const app = express();
   app.use(express.json({ limit: '1mb' }));
 

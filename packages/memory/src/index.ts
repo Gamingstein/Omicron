@@ -44,9 +44,14 @@ export class MemoryManager {
       
       // Fetch full metadata from Prisma
       const pointIds = results.map(r => r.id);
-      const metadata = await prisma.vectorMetadata.findMany({
+      const metadataFromDb = await prisma.vectorMetadata.findMany({
           where: { id: { in: pointIds as string[] } }
       });
+
+      const metadata = metadataFromDb.map(m => ({
+        ...m,
+        tags: m.tags ? m.tags.split(',') : [],
+      }));
 
       return results.map(r => ({
           ...r,
@@ -81,10 +86,13 @@ export class MemoryManager {
         }],
       });
 
+      const { tags, ...restOfMemory } = memory;
+
       await prisma.vectorMetadata.create({
         data: {
           id: pointId,
-          ...memory,
+          ...restOfMemory,
+          tags: tags?.join(',') || '',
         },
       });
       logger.info({ pointId }, 'Successfully upserted memory.');

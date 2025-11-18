@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import { Brain } from '@discord-agent/brain';
 import { logger } from '@discord-agent/commons';
-import { trackMessage, isUserTracked } from './session';
+import { trackMessage, isUserTracked } from '../session';
 
 export async function handleMessageCreate(message: Message, brain: Brain) {
   if (message.author.bot) return;
@@ -41,6 +41,8 @@ export async function handleMessageCreate(message: Message, brain: Brain) {
 
   } catch (error) {
     logger.error({ err: error, messageId: message.id }, 'Error processing message in brain.');
-    message.channel.send("I'm having a little trouble thinking right now. Please try again in a moment.");
+    if ('send' in message.channel) {
+      message.channel.send("I'm having a little trouble thinking right now. Please try again in a moment.");
+    }
   }
 }
