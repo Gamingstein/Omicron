@@ -23,3 +23,7 @@ packages/db/prisma/sqlite/
 # Qdrant
 qdrant_storage/
 models
+
+tsconfig.tsbuildinfo
+.vscode/
+.idea/
